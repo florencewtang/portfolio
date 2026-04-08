@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Florence Tang</title>
+  <style>
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Extraleicht.otf') format('opentype');
+      font-weight: 200; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Leicht.otf') format('opentype');
+      font-weight: 300; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Buch.otf') format('opentype');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-BuchKursiv.otf') format('opentype');
+      font-weight: 400; font-style: italic;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Kräftig.otf') format('opentype');
+      font-weight: 500; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Halbfett.otf') format('opentype');
+      font-weight: 600; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Dreiviertelfett.otf') format('opentype');
+      font-weight: 700; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-DreiviertelfettKursiv.otf') format('opentype');
+      font-weight: 700; font-style: italic;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Fett.otf') format('opentype');
+      font-weight: 800; font-style: normal;
+    }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f9f7f4;
+      --white: #ffffff;
+      --ink: #1a1a18;
+      --ink-muted: #6b6b67;
+      --accent: #2d5a4e;
+      --border: #e4e2de;
+      --serif: 'Söhne', system-ui, sans-serif;
+      --sans: 'Söhne', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: rgba(249, 247, 244, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 3rem 0;
+      background: var(--white);
+    }
+
+    .page-header-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 3rem;
+    }
+
+    .page-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .page-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+
+    .page-count {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      padding-bottom: 0.5rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-tabs {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 1.1rem 1.75rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:first-child { padding-left: 0; }
+
+    .tab-btn:hover { color: var(--ink); }
+
+    .tab-btn.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    /* ── WORK GRID ── */
+    .work-section {
+      padding: 4rem 3rem 8rem;
+      background: var(--cream);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* When filtered (non-all tabs): remove wide cards */
+    .work-grid.is-filtered .work-card-wide {
+      grid-column: span 1;
+    }
+    .work-grid.is-filtered .work-card-wide .work-card-image {
+      aspect-ratio: 16/9;
+    }
+
+    .work-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .work-card-wide { grid-column: span 2; }
+
+    .work-card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .work-card-wide .work-card-image { aspect-ratio: 21/9; }
+    .work-card:hover .work-card-image { transform: scale(1.03); }
+
+    .work-card-meta { padding: 1rem 0 0.25rem; }
+
+    .work-card-category {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .work-card-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink);
+    }
+
+    /* Hidden cards during filter */
+    .work-card.hidden {
+      display: none;
+    }
+
+    /* Empty state */
+    .no-results {
+      grid-column: span 2;
+      padding: 4rem 0;
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      display: none;
+    }
+
+    .no-results.visible { display: block; }
+
+    /* Animated count */
+    .visible-count {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      transition: opacity 0.2s;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.07s; }
+    .reveal-delay-2 { transition-delay: 0.14s; }
+    .reveal-delay-3 { transition-delay: 0.21s; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 9.5rem 3rem;
+      background: var(--ink);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      gap: 2rem;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      list-style: none;
+    }
+
+    .footer-nav a {
+      font-size: 0.8rem;
+      color: rgba(249, 247, 244, 0.55);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover { color: #f9f7f4; }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(249, 247, 244, 0.25);
+      margin-top: 5.5rem;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1.25rem;
+    }
+
+    .footer-contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(249, 247, 244, 0.9);
+      text-decoration: none;
+      border: 1px solid rgba(249, 247, 244, 0.35);
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .footer-contact-pill:hover {
+      background: rgba(249, 247, 244, 0.1);
+      border-color: rgba(249, 247, 244, 0.6);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(249, 247, 244, 0.45);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #f9f7f4; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 0; }
+      .page-header-top { padding-bottom: 2rem; }
+      .tab-btn { padding: 1rem 1.25rem; font-size: 0.75rem; }
+      .tab-btn:first-child { padding-left: 0; }
+      .work-section { padding: 3rem 1.5rem 6rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card-wide,
+      .work-grid.is-filtered .work-card-wide { grid-column: span 1; }
+      .work-card-wide .work-card-image,
+      .work-grid.is-filtered .work-card-wide .work-card-image { aspect-ratio: 16/9; }
+      footer { flex-direction: column; gap: 2.5rem; padding: 5rem 1.5rem; text-align: center; }
+      .footer-right { align-items: center; }
+      .footer-copy { margin-top: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Florence Tang</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="index.html#values">Approach</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Contact</a>
+  </nav>
+
+  <!-- PAGE HEADER + TABS -->
+  <header class="page-header">
+    <div class="page-header-top">
+      <div>
+        <span class="page-eyebrow">Portfolio</span>
+        <h1 class="page-title">Selected work</h1>
+      </div>
+      <span class="visible-count" id="visibleCount">12 projects</span>
+    </div>
+
+    <div class="filter-tabs" role="tablist">
+      <button class="tab-btn active" data-filter="all"   role="tab" aria-selected="true">All</button>
+      <button class="tab-btn"        data-filter="web"   role="tab" aria-selected="false">Web Production</button>
+      <button class="tab-btn"        data-filter="spatial" role="tab" aria-selected="false">Spatial</button>
+      <button class="tab-btn"        data-filter="graphics" role="tab" aria-selected="false">Graphics</button>
+    </div>
+  </header>
+
+  <!-- WORK GRID -->
+  <section class="work-section">
+    <div class="work-grid" id="workGrid">
+
+      <!-- WEB PRODUCTION ──────────────────────────── -->
+      <a class="work-card work-card-wide reveal" data-category="web" href="project-square-releases.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/79913141-75c5-49b3-ba6f-40f5b32e984c/Frame+5.png"
+          alt="Square Releases" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Web Production</p>
+          <h3 class="work-card-title">Square Releases</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-1" data-category="web" href="project-square-homepages.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/a4c027a5-160a-4b8e-b1d2-18713db43bb2/Frame+19.png"
+          alt="Square Homepages" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Web Production</p>
+          <h3 class="work-card-title">Square Homepages</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal" data-category="web" href="project-square-rebrand.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/22c51f27-a3df-434d-b323-1fb55dbe2b43/Frame+27.png"
+          alt="Square Rebrand" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Web Production</p>
+          <h3 class="work-card-title">Square Rebrand</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal" data-category="web" href="project-square-webxp.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/55b2db29-fb0b-433b-9231-94f1fa79565a/Frame+29.png"
+          alt="Square Web XP" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Web Production</p>
+          <h3 class="work-card-title">Square Web XP</h3>
+        </div>
+      </a>
+
+      <!-- SPATIAL ──────────────────────────────────── -->
+      <a class="work-card reveal reveal-delay-2" data-category="spatial" href="project-nike-cortez.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1602870920946-9H41LFT7MWFFFLBO24OV/cortez_tent2.jpg"
+          alt="Nike — Cortez Market" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Spatial · Experiential</p>
+          <h3 class="work-card-title">Nike — Cortez Market</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal" data-category="spatial" href="project-nordstrom-popup.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1591720763967-AG27GI4N1VCRLT6SPZTB/LSB_Nordstrom2_04.jpg"
+          alt="Nordstrom Pop-up" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Spatial · Retail</p>
+          <h3 class="work-card-title">Nordstrom Pop-up</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-1" data-category="spatial" href="project-filson-showroom.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1591713325826-R136DSA0EX9ACHNZBWX0/Filson-NewHQ-Vignettes-36.jpg"
+          alt="Filson — Showroom" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Spatial · Environment</p>
+          <h3 class="work-card-title">Filson — Showroom</h3>
+        </div>
+      </a>
+
+      <a class="work-card work-card-wide reveal" data-category="spatial" href="project-nike-nfl.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1602869386442-3FU3KADIKASPIYG166US/20181028-NKOSSEK-NFLGameDay-3581.jpg"
+          alt="Nike — NFL Game Day" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Spatial · Events</p>
+          <h3 class="work-card-title">Nike — NFL Game Day</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal" data-category="spatial" href="project-old-navy.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1591727343518-VCY8HTQ54WK4J3HRYYP4/ON_01.jpg"
+          alt="Old Navy — Free Concept" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Spatial · Concept</p>
+          <h3 class="work-card-title">Old Navy — Free Concept</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-1" data-category="spatial" href="project-converse-nba.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1602883042928-9ZPV0FWPZO7TSGQ22A9K/IMG_2199.jpg"
+          alt="Converse — NBA All Star" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Spatial · Experiential</p>
+          <h3 class="work-card-title">Converse — NBA All Star</h3>
+        </div>
+      </a>
+
+      <!-- GRAPHICS ──────────────────────────────────── -->
+      <a class="work-card reveal" data-category="graphics" href="project-lsb-lucky-brand.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1591718409984-5NNDM6W8QFBFGT2MFOGP/LSB_Lucky_08.jpg"
+          alt="LSB × Lucky Brand" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Graphics · Brand</p>
+          <h3 class="work-card-title">LSB × Lucky Brand</h3>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-1" data-category="graphics" href="project-asos-lsb.html">
+        <img class="work-card-image"
+          src="https://images.squarespace-cdn.com/content/v1/53d1afb2e4b090e9cd4f761d/1591716091047-0IVJHOK4ZU3JS89D4RMW/ASOS1.png"
+          alt="ASOS × LSB" loading="lazy" />
+        <div class="work-card-meta">
+          <p class="work-card-category">Graphics · Brand</p>
+          <h3 class="work-card-title">ASOS × LSB</h3>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <ul class="footer-nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="index.html#values">Approach</a></li>
+      </ul>
+      <p class="footer-copy">&copy; 2026 Florence Tang</p>
+    </div>
+    <div class="footer-right">
+      <a href="index.html#contact" class="footer-contact-pill">
+        Contact
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <ul class="footer-links">
+        <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // ── Filter tabs ──
+    const tabs    = document.querySelectorAll('.tab-btn');
+    const cards   = document.querySelectorAll('.work-card');
+    const grid    = document.getElementById('workGrid');
+    const counter = document.getElementById('visibleCount');
+
+    function updateCount() {
+      const n = [...cards].filter(c => !c.classList.contains('hidden')).length;
+      counter.textContent = n + ' project' + (n !== 1 ? 's' : '');
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+
+        // Update tab states
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Toggle filtered class on grid (controls wide card behaviour)
+        grid.classList.toggle('is-filtered', filter !== 'all');
+
+        // Show / hide cards
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !match);
+          // Re-trigger reveal for newly shown cards
+          if (match && !card.classList.contains('visible')) {
+            card.classList.add('visible');
+          }
+        });
+
+        updateCount();
+      });
+    });
+
+    updateCount();
+  </script>
+</body>
+</html>
