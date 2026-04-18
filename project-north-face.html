@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The North Face - Florence Tang</title>
+  <style>
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Extraleicht.otf') format('opentype'); font-weight: 200; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Leicht.otf') format('opentype'); font-weight: 300; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Buch.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-BuchKursiv.otf') format('opentype'); font-weight: 400; font-style: italic; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Kräftig.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Halbfett.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Dreiviertelfett.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Fett.otf') format('opentype'); font-weight: 800; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --black: #0a0a0a;
+      --muted: rgba(255,255,255,0.35);
+      --muted-dark: #888;
+      --border-dark: rgba(255,255,255,0.1);
+      --border-light: rgba(0,0,0,0.1);
+      --sans: 'Söhne', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      background: var(--white);
+      color: var(--black);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    #heroNav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      transition: opacity 0.3s;
+    }
+
+    #heroNav.hidden { opacity: 0; pointer-events: none; }
+
+    .nav-wordmark {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center a {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(0,0,0,0.5);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-center a:hover,
+    .nav-center a.active { color: var(--black); }
+
+    .nav-right { font-size: 0.72rem; font-weight: 300; color: rgba(0,0,0,0.4); }
+
+    .pill-nav {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 300;
+      display: flex;
+      gap: 1.5rem;
+      background: rgba(10, 10, 10, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      list-style: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .pill-nav.visible { opacity: 1; pointer-events: all; }
+
+    .pill-nav a {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+
+    .pill-nav a:hover { color: var(--white); }
+
+    .black-hero {
+      padding: 8rem 1.5rem 4rem;
+      background: var(--black);
+      position: relative;
+      z-index: 2;
+    }
+
+    .black-hero-label {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.5rem;
+    }
+
+    .black-hero-title {
+      font-size: clamp(1.5rem, 3vw, 2.75rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    #project-info {
+      background: var(--black);
+      position: relative;
+      z-index: 2;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      padding: 2rem 1.5rem;
+      gap: 2rem;
+      align-items: start;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .meta-row-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+
+    .meta-row-body {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+
+    .meta-row-body.muted { color: rgba(255,255,255,0.45); }
+
+    .all-work-wrap {
+      background: var(--black);
+      position: relative;
+      z-index: 2;
+      padding: 2rem 2rem 3rem;
+    }
+
+    .all-work-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--white);
+      background: var(--black);
+      border: 1px solid var(--white);
+      border-radius: 999px;
+      padding: 0.65rem 1.25rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .all-work-btn:hover { background: var(--white); color: var(--black); }
+
+    #project-main {
+      background: var(--black);
+      position: relative;
+      z-index: 2;
+      padding: 0 2rem;
+    }
+
+    #project-main img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    #project-gallery {
+      background: var(--black);
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery-item {
+      padding: 2rem;
+      background: var(--black);
+    }
+
+    .gallery-item-inner { overflow: hidden; }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      height: auto;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    .gallery-item-wide { grid-column: span 2; }
+    .gallery-item-wide img { aspect-ratio: 21/8; }
+
+    #reveal-wrap { position: relative; }
+
+    .contact-section {
+      background: var(--white);
+      padding: 8rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+      box-sizing: border-box;
+      position: sticky;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    .contact-headline {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      max-width: 900px;
+      margin-bottom: 3rem;
+    }
+
+    .contact-headline span { color: rgba(0,0,0,0.25); }
+
+    .contact-actions { display: flex; align-items: center; gap: 2rem; }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      padding: 0.85rem 1.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--white);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .contact-btn:hover { background: var(--white); color: var(--black); }
+
+    .contact-available { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--black); }
+
+    .contact-available-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .contact-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .contact-bottom-left { display: flex; flex-direction: column; gap: 0.25rem; }
+    .contact-bottom-left a, .contact-bottom-left span { font-size: 0.8rem; color: rgba(0,0,0,0.5); }
+    .contact-bottom-left a:hover { color: var(--black); }
+    .contact-social { display: flex; align-items: flex-end; gap: 1.5rem; }
+    .contact-social a { font-size: 0.8rem; color: rgba(0,0,0,0.5); transition: color 0.2s; }
+    .contact-social a:hover { color: var(--black); }
+    .contact-bottom-right { font-size: 0.75rem; color: rgba(0,0,0,0.35); text-align: right; }
+
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(10, 10, 10, 0.45);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      z-index: 200; display: flex; align-items: center; justify-content: center;
+      padding: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white); width: 100%; max-width: 800px;
+      padding: 3.5rem 4rem; position: relative;
+      transform: translateY(20px); transition: transform 0.35s ease; border-radius: 4px;
+    }
+
+    .modal-backdrop.open .modal { transform: none; }
+
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.75rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted-dark); font-size: 1.4rem; line-height: 1;
+      transition: color 0.2s; padding: 0.25rem;
+    }
+
+    .modal-close:hover { color: var(--black); }
+    .modal-header { margin-bottom: 2.5rem; }
+    .modal-title { font-family: var(--sans); font-weight: 300; font-size: 2rem; letter-spacing: -0.02em; color: var(--black); margin-bottom: 0.5rem; }
+    .modal-sub { font-size: 0.85rem; color: var(--muted-dark); font-weight: 300; }
+    .modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+    .modal-left { display: flex; flex-direction: column; justify-content: space-between; padding-top: 0.5rem; }
+    .modal-left-text { font-size: 0.875rem; line-height: 1.75; color: var(--muted-dark); font-weight: 300; margin-bottom: 2rem; }
+
+    .modal-book-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--black); color: var(--white); font-family: var(--sans);
+      font-size: 0.8rem; font-weight: 300; padding: 0.75rem 1.5rem;
+      border-radius: 999px; transition: opacity 0.2s; align-self: flex-start;
+    }
+
+    .modal-book-btn:hover { opacity: 0.75; }
+    .modal-form { display: flex; flex-direction: column; gap: 0; }
+    .form-field { border-bottom: 1px solid var(--border-light); padding: 1rem 0 0.5rem; position: relative; transition: border-color 0.2s; }
+    .form-field:focus-within { border-bottom-color: var(--black); }
+    .form-field label { display: block; font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted-dark); margin-bottom: 0.4rem; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; background: none; border: none; outline: none; font-family: var(--sans); font-size: 0.9rem; font-weight: 300; color: var(--black); resize: none; appearance: none; -webkit-appearance: none; }
+    .form-field textarea { min-height: 80px; }
+    .form-field select { cursor: pointer; }
+    .form-field .select-arrow { position: absolute; right: 0; bottom: 0.75rem; pointer-events: none; color: var(--muted-dark); }
+    .modal-actions { margin-top: 2rem; }
+
+    .modal-submit-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--black); color: var(--white); font-family: var(--sans);
+      font-size: 0.8rem; font-weight: 300; border: none; cursor: pointer;
+      padding: 0.75rem 1.5rem; border-radius: 999px; transition: opacity 0.2s;
+    }
+
+    .modal-submit-btn:hover { opacity: 0.75; }
+    .modal-submit-btn:disabled { opacity: 0.5; cursor: default; }
+
+    @media (max-width: 768px) {
+      .meta-row { grid-template-columns: 1fr; gap: 1rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item-wide { grid-column: span 1; }
+      .gallery-item img, .gallery-item-wide img { aspect-ratio: 4/3; }
+      .nav-center { display: none; }
+      .modal { padding: 2.5rem 1.75rem; }
+      .modal-body { grid-template-columns: 1fr; gap: 2rem 0; }
+      .modal-left { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PILL NAV -->
+  <ul class="pill-nav" id="pillNav">
+    <li><a href="index-v2.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- NAV -->
+  <nav id="heroNav">
+    <a href="index-v2.html" class="nav-wordmark">Florence Tang</a>
+    <ul class="nav-center">
+      <li><a href="index-v2.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right"></div>
+  </nav>
+
+  <div id="reveal-wrap">
+
+  <!-- BLACK HERO -->
+  <div class="black-hero">
+    <p class="black-hero-label">The North Face · Experiential · Brand Activation</p>
+    <h1 class="black-hero-title">The North Face</h1>
+  </div>
+
+  <!-- PROJECT INFO -->
+  <div id="project-info">
+    <div class="meta-row">
+      <div class="meta-row-label">Scope</div>
+      <div class="meta-row-body muted">
+        Experiential Design<br>
+        Brand Activation<br>
+        Spatial Design<br>
+        Art Direction<br>
+        Production Management
+      </div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-row-label">Overview</div>
+      <div class="meta-row-body" style="max-width: 50%;">
+        Designed and produced a brand activation for The North Face - creating an immersive experiential environment that captured the brand's commitment to exploration and performance. Oversaw spatial design, environmental graphics, and on-site production to deliver a cohesive experience that connected with the brand's community of athletes and outdoor enthusiasts.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN IMAGE -->
+  <div id="project-main">
+    <img src="north-face-cover.png" alt="The North Face brand activation" loading="lazy" />
+  </div>
+
+  <!-- GALLERY -->
+  <div id="project-gallery">
+    <div class="gallery-grid">
+
+      <div class="gallery-item">
+        <div class="gallery-item-inner">
+          <img src="tnf2.png" alt="The North Face" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-item-inner">
+          <img src="tnf3.png" alt="The North Face" loading="lazy" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ALL WORK LINK -->
+  <div class="all-work-wrap">
+    <a href="work.html" class="all-work-btn">← All Work</a>
+  </div>
+
+  <!-- CONTACT FOOTER -->
+  <div class="contact-section" id="contact">
+    <div>
+      <h2 class="contact-headline">Curious about what we<br><span>can create together?</span><br>Let's make something great.</h2>
+      <div class="contact-actions">
+        <button class="contact-btn" id="openContact">
+          Get in Touch
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="contact-available">
+          <span class="contact-available-dot"></span>
+          Available for work
+        </div>
+      </div>
+    </div>
+    <div class="contact-bottom">
+      <div class="contact-bottom-left">
+      </div>
+      <div class="contact-social">
+        <a href="https://www.linkedin.com/in/florencewtang" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="about.html">About</a>
+        <a href="work.html">All Work</a>
+      </div>
+      <div class="contact-bottom-right">&copy; 2026 Florence Tang</div>
+    </div>
+  </div>
+
+  </div><!-- /reveal-wrap -->
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Contact form">
+    <div class="modal">
+      <button class="modal-close" id="closeModal" aria-label="Close">&#x2715;</button>
+      <div class="modal-header">
+        <h3 class="modal-title">Let's talk</h3>
+        <p class="modal-sub">I'll get back to you within a day.</p>
+      </div>
+      <div class="modal-body">
+        <div class="modal-left">
+          <p class="modal-left-text">Whether you have a clear idea or just a spark of inspiration, I'm here to listen. Send a message or book a call and let's explore how to bring your project to life.</p>
+          <a href="https://cal.com/florencetang" target="_blank" rel="noopener" class="modal-book-btn">
+            Book a meeting
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <form class="modal-form" id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-field">
+            <label for="cf-name">Full Name</label>
+            <input id="cf-name" type="text" placeholder="Florence Tang" required />
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" type="email" placeholder="hello@example.com" required />
+          </div>
+          <div class="form-field">
+            <label for="cf-service">Service</label>
+            <select id="cf-service" required>
+              <option value="" disabled selected></option>
+              <option>Design</option>
+              <option>Experiential</option>
+              <option>Brand</option>
+              <option>Something else</option>
+            </select>
+            <svg class="select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="form-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" rows="4" placeholder="Tell me about your project…" required></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="modal-submit-btn">
+              Send
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const heroNav = document.getElementById('heroNav');
+    const pillNav = document.getElementById('pillNav');
+
+    function onScroll() {
+      const pastHero = window.scrollY >= window.innerHeight * 0.4;
+      heroNav.classList.toggle('hidden', pastHero);
+      pillNav.classList.toggle('visible', pastHero);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      });
+    });
+
+    const backdrop = document.getElementById('modalBackdrop');
+    document.getElementById('openContact').addEventListener('click', () => {
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function closeModal() {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('[type="submit"]');
+      btn.textContent = 'Sent ✓';
+      btn.disabled = true;
+      setTimeout(closeModal, 1400);
+    }
+  </script>
+
+</body>
+</html>

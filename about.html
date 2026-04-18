@@ -3,69 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Florence Tang</title>
+  <title>About - Florence Tang</title>
   <style>
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Extraleicht.otf') format('opentype');
-      font-weight: 200; font-style: normal;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Leicht.otf') format('opentype');
-      font-weight: 300; font-style: normal;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Buch.otf') format('opentype');
-      font-weight: 400; font-style: normal;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-BuchKursiv.otf') format('opentype');
-      font-weight: 400; font-style: italic;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Kräftig.otf') format('opentype');
-      font-weight: 500; font-style: normal;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Halbfett.otf') format('opentype');
-      font-weight: 600; font-style: normal;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Dreiviertelfett.otf') format('opentype');
-      font-weight: 700; font-style: normal;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-DreiviertelfettKursiv.otf') format('opentype');
-      font-weight: 700; font-style: italic;
-    }
-    @font-face {
-      font-family: 'Söhne';
-      src: url('TestSöhne-Fett.otf') format('opentype');
-      font-weight: 800; font-style: normal;
-    }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Extraleicht.otf') format('opentype'); font-weight: 200; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Leicht.otf') format('opentype'); font-weight: 300; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Buch.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-BuchKursiv.otf') format('opentype'); font-weight: 400; font-style: italic; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Kräftig.otf') format('opentype'); font-weight: 500; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Halbfett.otf') format('opentype'); font-weight: 600; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Dreiviertelfett.otf') format('opentype'); font-weight: 700; }
+    @font-face { font-family: 'Söhne'; src: url('TestSöhne-Fett.otf') format('opentype'); font-weight: 800; }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #f9f7f4;
       --white: #ffffff;
-      --ink: #1a1a18;
-      --ink-muted: #6b6b67;
-      --accent: #2d5a4e;
-      --accent-light: #e8f0ee;
-      --border: #e4e2de;
-      --serif: 'Söhne', system-ui, sans-serif;
+      --black: #0a0a0a;
+      --muted: rgba(255,255,255,0.35);
+      --muted-dark: #888;
+      --border-dark: rgba(255,255,255,0.1);
+      --border-light: rgba(0,0,0,0.1);
       --sans: 'Söhne', system-ui, sans-serif;
     }
 
@@ -73,445 +30,332 @@
 
     body {
       font-family: var(--sans);
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: 13px;
+      line-height: 1.5;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      background-color: var(--cream);
+      background: var(--white);
+      color: var(--black);
     }
 
-    /* ── NAV ── */
-    nav {
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HERO NAV ── */
+    #heroNav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.5rem 3rem;
-      transition: background 0.4s, border-color 0.4s;
-      border-bottom: 1px solid transparent;
+      padding: 1.25rem 1.5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      transition: opacity 0.3s;
     }
 
-    nav.at-top { background: transparent; }
-    nav.at-top .nav-logo,
-    nav.at-top .nav-links a { color: rgba(255,255,255,0.9); }
-    nav.at-top .nav-cta {
-      color: rgba(255,255,255,0.9);
-      border-color: rgba(255,255,255,0.5);
-    }
-    nav.at-top .nav-cta:hover {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
+    #heroNav.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    nav.scrolled {
-      background: rgba(249, 247, 244, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom-color: var(--border);
-    }
-    nav.scrolled .nav-logo { color: var(--ink); }
-    nav.scrolled .nav-links a { color: var(--ink-muted); }
-    nav.scrolled .nav-links a:hover { color: var(--ink); }
-    nav.scrolled .nav-links a.active { color: var(--ink); }
-    nav.scrolled .nav-cta {
-      color: var(--ink);
-      border-color: var(--ink);
-    }
-    nav.scrolled .nav-cta:hover {
-      background: var(--ink);
-      color: var(--white);
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: 1.1rem;
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color 0.3s;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 300;
+    .nav-wordmark {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--black);
       text-decoration: none;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center a {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(0,0,0,0.5);
+      letter-spacing: 0.03em;
       transition: color 0.2s;
     }
 
-    .nav-links a.active {
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 1px;
+    .nav-center a:hover,
+    .nav-center a.active { color: var(--black); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(0,0,0,0.4);
     }
 
-    .nav-cta {
-      font-size: 0.8rem;
-      font-weight: 300;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border: 1px solid currentColor;
+    /* ── PILL NAV ── */
+    .pill-nav {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 300;
+      display: flex;
+      gap: 1.5rem;
+      background: rgba(10, 10, 10, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 999px;
       padding: 0.55rem 1.25rem;
-      transition: background 0.2s, color 0.2s;
+      list-style: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
     }
 
-    /* ── PAGE HERO ── */
-    #page-hero {
-      min-height: 65vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 3rem 5rem;
-      background: var(--ink);
-      position: relative;
+    .pill-nav.visible {
+      opacity: 1;
+      pointer-events: all;
     }
 
-    .page-hero-label {
-      font-size: 0.75rem;
+    .pill-nav a {
+      font-size: 0.78rem;
       font-weight: 300;
-      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .pill-nav a:hover { color: var(--white); }
+
+    /* ── BLACK HERO ── */
+    .black-hero {
+      padding: 8rem 1.5rem 4rem;
+      background: var(--black);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Black content sections sit above sticky contact */
+    #bio, #experience, #education {
+      position: relative;
+      z-index: 2;
+    }
+
+    .black-hero-label {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.35);
       margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.2s forwards;
     }
 
-    .page-hero-title {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(3rem, 7vw, 7.5rem);
-      line-height: 1.0;
+    .black-hero-title {
+      font-size: clamp(1.5rem, 3vw, 2.75rem);
+      font-weight: 700;
+      line-height: 0.95;
       letter-spacing: -0.03em;
-      color: #fff;
-      max-width: 16ch;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.35s forwards;
+      color: var(--white);
+      text-transform: uppercase;
+      max-width: 14ch;
     }
 
-    .page-hero-title em {
-      font-style: italic;
-      color: rgba(255,255,255,0.45);
-    }
-
-    /* ── ABOUT INTRO (same as homepage) ── */
-    #about-intro {
+    /* ── SHARED ROW ── */
+    .exp-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 7rem 3rem;
-      gap: 5rem;
-      background: var(--cream);
-    }
-
-    .about-image {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-
-    .about-image img {
-      width: 100%;
-      max-width: 380px;
-      height: 520px;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-      transition: transform 0.8s ease;
-    }
-
-    .about-image:hover img { transform: scale(1.02); }
-
-    .about-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .about-heading {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      max-width: 18ch;
-      margin-bottom: 2rem;
-    }
-
-    .about-heading em { font-style: italic; color: var(--accent); }
-
-    .about-text {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--ink-muted);
-      font-weight: 300;
-      max-width: 48ch;
-    }
-
-    .about-text p + p { margin-top: 1.25rem; }
-
-    /* ── BIO SECTION ── */
-    #bio {
-      background: var(--white);
-      padding: 7rem 3rem;
-    }
-
-    .bio-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 6rem;
+      grid-template-columns: 260px 1fr auto;
+      padding: 2rem 1.5rem;
+      gap: 2rem;
       align-items: start;
     }
 
-    .bio-aside {
-      position: sticky;
-      top: 8rem;
+    /* Section dividers */
+    #bio .exp-row:first-child,
+    #experience .exp-row:first-child,
+    #education .exp-row:first-child {
+      border-top: 1px solid var(--border-dark);
     }
 
-    .bio-aside-label {
-      font-size: 0.75rem;
-      font-weight: 300;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    .bio-aside-title {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-    }
-
-    .bio-text {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: var(--ink-muted);
-      font-weight: 300;
-    }
-
-    .bio-text p + p { margin-top: 1.5rem; }
-
-    .bio-text strong {
-      color: var(--ink);
-      font-weight: 300;
-    }
+    /* ── BIO ── */
+    #bio { background: var(--black); }
 
     /* ── EXPERIENCE ── */
-    #experience {
-      background: var(--cream);
-      padding: 7rem 3rem;
-    }
+    #experience { background: var(--black); }
 
-    .experience-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 300;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 3rem;
-      display: block;
-    }
-
-    .experience-list {
-      border-top: 1px solid var(--border);
-    }
-
-    .experience-row {
-      display: grid;
-      grid-template-columns: 2fr 1.5fr 1fr;
-      gap: 2rem;
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
+    .exp-row-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--white);
     }
 
     .exp-role {
-      font-family: var(--serif);
+      font-size: 0.8rem;
       font-weight: 300;
-      font-size: 1.2rem;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.35rem;
+      color: var(--white);
+      margin-bottom: 0.2rem;
     }
 
     .exp-company {
-      font-size: 0.875rem;
-      color: var(--accent);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
       font-weight: 300;
-      letter-spacing: 0.01em;
+      margin-bottom: 0.75rem;
     }
 
-    .exp-details {
-      font-size: 0.9rem;
-      line-height: 1.75;
-      color: var(--ink-muted);
+    .exp-detail {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
       font-weight: 300;
+      line-height: 1.65;
     }
 
     .exp-period {
-      font-size: 0.82rem;
-      color: var(--ink-muted);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
       font-weight: 300;
-      letter-spacing: 0.02em;
-      padding-top: 0.2rem;
-    }
-
-    .exp-period span {
-      display: block;
-      margin-top: 0.25rem;
-      font-size: 0.78rem;
+      white-space: nowrap;
+      text-align: right;
     }
 
     /* ── EDUCATION ── */
     #education {
+      background: var(--black);
+    }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
       background: var(--white);
-      padding: 7rem 3rem;
+      padding: 8rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+      box-sizing: border-box;
+      position: sticky;
+      bottom: 0;
+      z-index: 1;
     }
 
-    .education-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+    /* ── REVEAL WRAP ── */
+    #reveal-wrap {
+      position: relative;
     }
 
-    .education-list {
-      border-top: 1px solid var(--border);
+    .contact-headline {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      max-width: 900px;
+      margin-bottom: 3rem;
+    }
+
+    .contact-headline span { color: rgba(0,0,0,0.25); }
+
+    .contact-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-grow: 1;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      text-decoration: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .contact-btn:hover { opacity: 0.75; }
+
+    .contact-available {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--black);
+    }
+
+    .contact-available-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .contact-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
       margin-top: 0;
     }
 
-    .education-row {
-      display: grid;
-      grid-template-columns: 2fr 1.5fr 1fr;
-      gap: 2rem;
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-    }
-
-    .edu-degree {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: 1.2rem;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.35rem;
-    }
-
-    .edu-school {
-      font-size: 0.875rem;
-      color: var(--accent);
-      font-weight: 300;
-    }
-
-    .edu-detail {
-      font-size: 0.9rem;
-      line-height: 1.75;
-      color: var(--ink-muted);
-      font-weight: 300;
-    }
-
-    .edu-location {
-      font-size: 0.82rem;
-      color: var(--ink-muted);
-      font-weight: 300;
-      letter-spacing: 0.02em;
-    }
-
-    /* ── CONTACT CTA ── */
-    #contact {
-      background: var(--white);
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 8rem 3rem;
-      overflow: hidden;
-    }
-
-    .contact-aside {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
-      color: var(--ink-muted);
-      line-height: 1.5;
-    }
-
-    .contact-aside-left  { left: 3rem;  text-align: left; }
-    .contact-aside-right { right: 3rem; text-align: right; }
-
-    .contact-center {
-      text-align: center;
+    .contact-bottom-left {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 2.5rem;
-      max-width: 820px;
+      gap: 0.25rem;
     }
 
-    .contact-heading {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(3.5rem, 8vw, 8rem);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      font-style: italic;
-    }
-
-    .pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 300;
-      letter-spacing: 0.02em;
-      color: var(--ink);
-      background: none;
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-      padding: 0.75rem 1.75rem;
-      cursor: pointer;
+    .contact-bottom-left a,
+    .contact-bottom-left span {
+      font-size: 0.8rem;
+      color: rgba(0,0,0,0.5);
       text-decoration: none;
-      transition: background 0.2s, color 0.2s, gap 0.2s;
     }
 
-    .pill-btn:hover {
-      background: var(--ink);
-      color: var(--white);
-      gap: 1rem;
+    .contact-bottom-left a:hover { color: var(--black); }
+
+    .contact-bottom-right {
+      font-size: 0.75rem;
+      color: rgba(0,0,0,0.35);
+      text-align: right;
     }
 
-    .pill-btn svg { transition: transform 0.2s; flex-shrink: 0; }
-    .pill-btn:hover svg { transform: translateX(3px); }
+    .contact-social {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.5rem;
+    }
+
+    .contact-social a {
+      font-size: 0.8rem;
+      color: rgba(0,0,0,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-social a:hover { color: var(--black); }
 
     /* ── MODAL ── */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(26, 26, 24, 0.5);
+      background: rgba(10, 10, 10, 0.45);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       z-index: 200;
@@ -524,52 +368,49 @@
       transition: opacity 0.3s;
     }
 
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
 
     .modal {
       background: var(--white);
       width: 100%;
-      max-width: 780px;
+      max-width: 800px;
       padding: 3.5rem 4rem;
       position: relative;
       transform: translateY(20px);
       transition: transform 0.35s ease;
+      border-radius: 4px;
     }
 
     .modal-backdrop.open .modal { transform: none; }
 
     .modal-close {
       position: absolute;
-      top: 1.5rem;
-      right: 1.75rem;
-      background: none;
-      border: none;
+      top: 1.5rem; right: 1.75rem;
+      background: none; border: none;
       cursor: pointer;
-      color: var(--ink-muted);
+      color: var(--muted-dark);
       font-size: 1.4rem;
       line-height: 1;
       transition: color 0.2s;
       padding: 0.25rem;
     }
 
-    .modal-close:hover { color: var(--ink); }
+    .modal-close:hover { color: var(--black); }
 
     .modal-header { margin-bottom: 2.5rem; }
 
     .modal-title {
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-weight: 300;
       font-size: 2rem;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
+      color: var(--black);
       margin-bottom: 0.5rem;
     }
 
     .modal-sub {
-      font-size: 0.9rem;
-      color: var(--ink-muted);
+      font-size: 0.85rem;
+      color: var(--muted-dark);
       font-weight: 300;
     }
 
@@ -587,30 +428,48 @@
     }
 
     .modal-left-text {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       line-height: 1.75;
-      color: var(--ink-muted);
+      color: var(--muted-dark);
       font-weight: 300;
       margin-bottom: 2rem;
     }
 
+    .modal-book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .modal-book-btn:hover { opacity: 0.75; }
+
     .modal-form { display: flex; flex-direction: column; gap: 0; }
 
     .form-field {
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
       padding: 1rem 0 0.5rem;
       position: relative;
       transition: border-color 0.2s;
     }
 
-    .form-field:focus-within { border-bottom-color: var(--ink); }
+    .form-field:focus-within { border-bottom-color: var(--black); }
 
     .form-field label {
       display: block;
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: var(--ink-muted);
+      color: var(--muted-dark);
       margin-bottom: 0.4rem;
     }
 
@@ -622,9 +481,9 @@
       border: none;
       outline: none;
       font-family: var(--sans);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 300;
-      color: var(--ink);
+      color: var(--black);
       resize: none;
       appearance: none;
       -webkit-appearance: none;
@@ -635,359 +494,215 @@
 
     .form-field .select-arrow {
       position: absolute;
-      right: 0;
-      bottom: 0.75rem;
+      right: 0; bottom: 0.75rem;
       pointer-events: none;
-      color: var(--ink-muted);
+      color: var(--muted-dark);
     }
 
     .modal-actions { margin-top: 2rem; }
 
-    @media (max-width: 700px) {
-      .modal { padding: 2.5rem 1.75rem; }
-      .modal-body { grid-template-columns: 1fr; gap: 2rem 0; }
-      .contact-aside { display: none; }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 9.5rem 3rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 2rem;
-    }
-
-    .footer-left {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .footer-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      list-style: none;
-    }
-
-    .footer-nav a {
-      font-size: 0.8rem;
-      color: rgba(249, 247, 244, 0.55);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .footer-nav a:hover { color: var(--cream); }
-
-    .footer-copy {
-      font-size: 0.75rem;
-      color: rgba(249, 247, 244, 0.25);
-      letter-spacing: 0.02em;
-      margin-top: 5.5rem;
-    }
-
-    .footer-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 1.25rem;
-    }
-
-    .footer-contact-pill {
+    .modal-submit-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      background: var(--black);
+      color: var(--white);
       font-family: var(--sans);
       font-size: 0.8rem;
       font-weight: 300;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: rgba(249, 247, 244, 0.9);
-      text-decoration: none;
-      border: 1px solid rgba(249, 247, 244, 0.35);
+      border: none;
+      cursor: pointer;
+      padding: 0.75rem 1.5rem;
       border-radius: 999px;
-      padding: 0.55rem 1.25rem;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: opacity 0.2s;
     }
 
-    .footer-contact-pill:hover {
-      background: rgba(249, 247, 244, 0.1);
-      border-color: rgba(249, 247, 244, 0.6);
-    }
+    .modal-submit-btn:hover { opacity: 0.75; }
+    .modal-submit-btn:disabled { opacity: 0.5; cursor: default; }
 
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-size: 0.8rem;
-      color: rgba(249, 247, 244, 0.45);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--cream); }
-
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.visible { opacity: 1; transform: none; }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-
-    /* ── KEYFRAMES ── */
-    @keyframes fadeUp {
-      to { opacity: 1; transform: none; }
+    @media (max-width: 700px) {
+      .modal { padding: 2.5rem 1.75rem; }
+      .modal-body { grid-template-columns: 1fr; gap: 2rem 0; }
+      .modal-left { display: none; }
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1.25rem 1.5rem; }
-      .nav-links { display: none; }
-
-      #page-hero { padding: 0 1.5rem 4rem; min-height: 55vh; }
-
-      #about-intro { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2.5rem; }
-      .about-image img { max-width: 280px; height: 380px; }
-      .about-image { justify-content: flex-start; }
-
-      #bio { padding: 5rem 1.5rem; }
-      .bio-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .bio-aside { position: static; }
-
-      #experience { padding: 5rem 1.5rem; }
-      .experience-row { grid-template-columns: 1fr; gap: 0.75rem; }
-
-      #education { padding: 5rem 1.5rem; }
-      .education-row { grid-template-columns: 1fr; gap: 0.75rem; }
-
-      #contact { padding: 6rem 1.5rem; min-height: 60vh; }
-      footer { flex-direction: column; gap: 2.5rem; padding: 5rem 1.5rem; text-align: center; }
-      .footer-right { align-items: center; }
-      .footer-copy { margin-top: 2rem; }
-      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    @media (max-width: 700px) {
+      .about-row,
+      .bio-intro-row,
+      .exp-row { grid-template-columns: 1fr; }
+      .about-row-label,
+      .bio-intro-label { border-right: none; border-bottom: 1px solid var(--border-dark); }
+      .nav-center { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- PILL NAV -->
+  <ul class="pill-nav" id="pillNav">
+    <li><a href="index-v2.html">Home</a></li>
+    <li><a href="about.html" style="color:var(--white)">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
   <!-- NAV -->
-  <nav id="nav" class="at-top">
-    <a href="index.html" class="nav-logo">Florence Tang</a>
-    <ul class="nav-links">
+  <nav id="heroNav">
+    <a href="index-v2.html" class="nav-wordmark">Florence Tang</a>
+    <ul class="nav-center">
+      <li><a href="index-v2.html">Home</a></li>
       <li><a href="about.html" class="active">About</a></li>
-      <li><a href="index.html#services">Services</a></li>
       <li><a href="work.html">Work</a></li>
-      <li><a href="index.html#values">Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="nav-cta" id="openContact">Contact</a>
+    <div class="nav-right"></div>
   </nav>
 
-  <!-- PAGE HERO -->
-  <section id="page-hero">
-    <p class="page-hero-label">About</p>
-    <h1 class="page-hero-title">Where <em>craft</em> meets production.</h1>
-  </section>
+  <div id="reveal-wrap">
 
-  <!-- ABOUT INTRO (mirrored from homepage) -->
-  <section id="about-intro">
-    <div class="about-image reveal">
-      <img src="florence.jpg" alt="Florence Tang, Web Production Lead" />
-    </div>
-    <div class="about-body">
-      <h2 class="about-heading reveal reveal-delay-1">
-        Designing with purpose, producing with precision.
-      </h2>
-      <div class="about-text reveal reveal-delay-2">
-        <p>
-          I lead end-to-end web production — turning strategy and design into polished, high-performing websites. My work sits at the intersection of visual precision and technical execution.
-        </p>
-        <p>
-          I thrive in collaborative environments where teams move fast but care about the details. Whether managing timelines, overseeing QA, or rolling up my sleeves in the CMS, I make sure every launch lands well.
-        </p>
-        <p>
-          Good web production is invisible — things just work, load fast, and look exactly right. That's the standard I hold myself to.
-        </p>
+  <!-- BLACK HERO -->
+  <div class="black-hero">
+    <p class="black-hero-label">About</p>
+    <h1 class="black-hero-title">The creative and the operational.</h1>
+  </div>
+
+  <!-- BIO SECTION (black) -->
+  <div id="bio">
+
+    <div class="exp-row">
+      <div class="exp-row-label">Full bio</div>
+      <div style="grid-column: span 2;">
+        <p style="font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.7;">I studied Graphic Design at York University and Sheridan College, graduating with a Bachelor of Design with Honours. Drawn west by a love of fashion and visual culture, I continued at the Fashion Institute of Design &amp; Merchandising in San Francisco, completing a Visual Communications certificate and graduating Summa Cum Laude.</p>
+        <br>
+        <p style="font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.7;">My career began at Levi Strauss, where I produced global merchandising assets and developed a deep appreciation for brand consistency at scale. I then joined Conduit Creative Studio in Los Angeles as a Concept Designer, developing multi-channel design through retail, fashion and marketing.</p>
+        <br>
+        <p style="font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.7;">For six years, I co-founded and led creative direction at Lot, Stock and Barrel - a creative collective in LA specializing in apparel, spatial, and graphic design. We partnered with brands to design and produce experiential retail activations, product launches, and music festivals.</p>
+        <br>
+        <p style="font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.7;">In 2021, I joined Block (Square Inc.) as Digital and Web Production Lead - overseeing a 14-person team and managing publishing operations across 17,000+ pages in 8 countries and 11 locales. I reduced delivery cycle times from 5–6 months down to weeks, and drove a +$500M annualized incremental NVA contribution.</p>
+        <br>
+        <p style="font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.75); line-height:1.7;">Five years back in Toronto and still going - I bring the full breadth of this work, strategic, creative, and operational, to companies both big and small.</p>
       </div>
     </div>
-  </section>
 
-  <!-- FULL BIO -->
-  <section id="bio">
-    <div class="bio-inner">
-      <div class="bio-aside reveal">
-        <span class="bio-aside-label">Background</span>
-        <h2 class="bio-aside-title">The full<br>story.</h2>
+  </div>
+
+  <!-- EXPERIENCE (black) -->
+  <div id="experience">
+
+    <div class="exp-row">
+      <div class="exp-row-label">Experience</div>
+      <div>
+        <p class="exp-role">Digital and Web Production Lead</p>
+        <p class="exp-company">Block (Square Inc.)</p>
+        <p class="exp-detail">Led web production operations across global properties, managing a 14-person team, SLA governance, and company-wide launches. Drove +$500M in annualized incremental NVA and +33% conversion lift.</p>
       </div>
-      <div class="bio-text reveal reveal-delay-1">
-        <p>
-          I studied Graphic Design at <strong>York University and Sheridan College</strong>, graduating with a Bachelor of Design with Honours. Drawn west by a love of fashion and visual culture, I continued at the <strong>Fashion Institute of Design &amp; Merchandising in San Francisco</strong>, completing a Visual Communications certificate and graduating Summa Cum Laude.
-        </p>
-        <p>
-          My career began at <strong>Levi Strauss</strong>, where I produced global merchandising assets and developed a deep appreciation for brand consistency at scale. I then joined <strong>Conduit Creative Studio</strong> in Los Angeles as a Concept Designer, developing multi-channel marketing campaigns and learning how ideas move from brief to reality.
-        </p>
-        <p>
-          For six years, I co-founded and led creative direction at <strong>Lot, Stock and Barrel</strong> — a collective of creatives based in LA specializing in apparel, spatial, and graphic design. We partnered with brands to design and produce end-to-end experiential moments: retail activations, product launches, and music festivals. I managed everything from concept through execution, often producing customization experiences on-site.
-        </p>
-        <p>
-          In 2021, I joined <strong>Block (Square Inc.)</strong> as Digital and Web Production Lead — overseeing a 14-person team and managing publishing operations across 17,000+ pages in 8 countries and 11 locales. I reduced delivery cycle times from 5–6 months down to weeks, led company-wide launches involving 40+ teams, and drove measurable results including a +$500M annualized incremental NVA contribution.
-        </p>
-        <p>
-          Now back in Toronto, I'm eager to bring this breadth — strategic, creative, and operational — to companies both big and small. My goal is always to find creative solutions that respect the values and integrity of each brand.
-        </p>
-        <p>
-          Say hello through the contact form — I'd love to chat about your next project.
-        </p>
-      </div>
+      <div class="exp-period">2021–2026<br>Toronto, ON</div>
     </div>
-  </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="experience-inner">
-      <span class="section-label reveal">Experience</span>
-      <div class="experience-list">
+    <div class="exp-row">
+      <div class="exp-row-label"></div>
+      <div>
+        <p class="exp-role">Creative Lead</p>
+        <p class="exp-company">Lot, Stock and Barrel</p>
+        <p class="exp-detail">Co-founded and directed a creative agency specializing in apparel, spatial, and graphic design. Produced experiential events and retail activations for recognizable consumer brands.</p>
+      </div>
+      <div class="exp-period">2014–2020<br>Los Angeles, CA</div>
+    </div>
 
-        <div class="experience-row reveal">
-          <div>
-            <p class="exp-role">Digital and Web Production Lead</p>
-            <p class="exp-company">Block (Square Inc.)</p>
-          </div>
-          <p class="exp-details">
-            Led web production operations across global properties, managing a 14-person team, SLA governance, and company-wide launches. Drove +$500M in annualized incremental NVA and +33% conversion lift.
-          </p>
-          <div class="exp-period">
-            2021–2026
-            <span>Toronto, ON</span>
-          </div>
+    <div class="exp-row">
+      <div class="exp-row-label"></div>
+      <div>
+        <p class="exp-role">Concept Designer</p>
+        <p class="exp-company">Conduit Creative Studio</p>
+        <p class="exp-detail">Developed marketing concepts and executed multi-channel production deliverables for a creative consulting agency.</p>
+      </div>
+      <div class="exp-period">2012–2014<br>Los Angeles, CA</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-row-label"></div>
+      <div>
+        <p class="exp-role">Visual Merchandiser &amp; Graphic Designer</p>
+        <p class="exp-company">Levi Strauss (XX Team)</p>
+        <p class="exp-detail">Produced global merchandising assets and maintained brand consistency across regions.</p>
+      </div>
+      <div class="exp-period">2011–2012<br>San Francisco, CA</div>
+    </div>
+
+  </div>
+
+  <!-- EDUCATION (black) -->
+  <div id="education">
+
+    <div class="exp-row">
+      <div class="exp-row-label">Education</div>
+      <div>
+        <p class="exp-role">Bachelor of Design, Honours</p>
+        <p class="exp-company">York University &amp; Sheridan College</p>
+        <p class="exp-detail">Graphic Design</p>
+      </div>
+      <div class="exp-period">Toronto, ON</div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-row-label"></div>
+      <div>
+        <p class="exp-role">A.A., Visual Communications</p>
+        <p class="exp-company">Fashion Institute of Design &amp; Merchandising (FIDM)</p>
+        <p class="exp-detail">Summa Cum Laude</p>
+      </div>
+      <div class="exp-period">San Francisco, CA</div>
+    </div>
+
+  </div>
+
+  <!-- CONTACT FOOTER - sticky bottom, revealed as black scrolls away -->
+  <div class="contact-section" id="contact">
+    <div>
+      <h2 class="contact-headline">Curious about what we<br><span>can create together?</span><br>Let's make something great.</h2>
+      <div class="contact-actions">
+        <button class="contact-btn" id="openContact">
+          Get in Touch
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="contact-available">
+          <span class="contact-available-dot"></span>
+          Available for work
         </div>
-
-        <div class="experience-row reveal">
-          <div>
-            <p class="exp-role">Creative Lead</p>
-            <p class="exp-company">Lot, Stock and Barrel</p>
-          </div>
-          <p class="exp-details">
-            Co-founded and directed a creative agency specializing in apparel, spatial, and graphic design. Produced experiential events and retail activations for recognizable consumer brands.
-          </p>
-          <div class="exp-period">
-            2014–2020
-            <span>Los Angeles, CA</span>
-          </div>
-        </div>
-
-        <div class="experience-row reveal">
-          <div>
-            <p class="exp-role">Concept Designer</p>
-            <p class="exp-company">Conduit Creative Studio</p>
-          </div>
-          <p class="exp-details">
-            Developed marketing concepts and executed multi-channel production deliverables for a creative consulting agency.
-          </p>
-          <div class="exp-period">
-            2012–2014
-            <span>Los Angeles, CA</span>
-          </div>
-        </div>
-
-        <div class="experience-row reveal">
-          <div>
-            <p class="exp-role">Visual Merchandiser &amp; Graphic Designer</p>
-            <p class="exp-company">Levi Strauss (XX Team)</p>
-          </div>
-          <p class="exp-details">
-            Produced global merchandising assets and maintained brand consistency across regions.
-          </p>
-          <div class="exp-period">
-            2011–2012
-            <span>San Francisco, CA</span>
-          </div>
-        </div>
-
       </div>
     </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="education-inner">
-      <span class="section-label reveal">Education</span>
-      <div class="education-list">
-
-        <div class="education-row reveal">
-          <div>
-            <p class="edu-degree">Bachelor of Design, Honours</p>
-            <p class="edu-school">York University &amp; Sheridan College</p>
-          </div>
-          <p class="edu-detail">Graphic Design</p>
-          <p class="edu-location">Toronto, ON</p>
-        </div>
-
-        <div class="education-row reveal">
-          <div>
-            <p class="edu-degree">A.A., Visual Communications</p>
-            <p class="edu-school">Fashion Institute of Design &amp; Merchandising (FIDM)</p>
-          </div>
-          <p class="edu-detail">Summa Cum Laude</p>
-          <p class="edu-location">San Francisco, CA</p>
-        </div>
-
+    <div class="contact-bottom">
+      <div class="contact-bottom-left">
+        <span>Toronto, ON</span>
       </div>
+      <div class="contact-social">
+        <a href="https://www.linkedin.com/in/florencewtang" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="about.html">About</a>
+        <a href="work.html">All Work</a>
+      </div>
+      <div class="contact-bottom-right">&copy; 2026 Florence Tang</div>
     </div>
-  </section>
+  </div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="contact-aside contact-aside-left reveal">Say hello,</p>
-    <p class="contact-aside contact-aside-right reveal">I reply quickly</p>
-
-    <div class="contact-center reveal">
-      <h2 class="contact-heading">Ready to build<br>something that<br><em>lasts?</em></h2>
-      <button class="pill-btn" id="openContactBtn">
-        Write to me, I reply quickly
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
+  </div><!-- /reveal-wrap -->
 
   <!-- CONTACT MODAL -->
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Contact form">
     <div class="modal">
       <button class="modal-close" id="closeModal" aria-label="Close">&#x2715;</button>
-
       <div class="modal-header">
         <h3 class="modal-title">Let's talk</h3>
         <p class="modal-sub">I'll get back to you within a day.</p>
       </div>
-
       <div class="modal-body">
         <div class="modal-left">
-          <p class="modal-left-text">
-            Whether you have a clear idea or just a spark of inspiration, I'm here to listen. Send a message or book a call and let's explore how to bring your project to life.
-          </p>
-          <a href="https://cal.com" target="_blank" rel="noopener" class="pill-btn">
+          <p class="modal-left-text">Whether you have a clear idea or just a spark of inspiration, I'm here to listen. Send a message or book a call and let's explore how to bring your project to life.</p>
+          <a href="https://cal.com/florencetang" target="_blank" rel="noopener" class="modal-book-btn">
             Book a meeting
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-
         <form class="modal-form" id="contactForm" onsubmit="handleSubmit(event)">
           <div class="form-field">
             <label for="cf-name">Full Name</label>
@@ -1004,7 +719,7 @@
               <option>Design</option>
               <option>Web Production</option>
               <option>CMS &amp; Ops</option>
-              <option>Leadership &amp; Management</option>
+              <option>Brand</option>
               <option>Something else</option>
             </select>
             <svg class="select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
@@ -1014,9 +729,9 @@
             <textarea id="cf-message" rows="4" placeholder="Tell me about your project…" required></textarea>
           </div>
           <div class="modal-actions">
-            <button type="submit" class="pill-btn">
+            <button type="submit" class="modal-submit-btn">
               Send
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
           </div>
         </form>
@@ -1024,68 +739,40 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-left">
-      <ul class="footer-nav">
-        <li><a href="about.html">About</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="work.html">Work</a></li>
-        <li><a href="index.html#values">Approach</a></li>
-      </ul>
-      <p class="footer-copy">&copy; 2026 Florence Tang</p>
-    </div>
-    <div class="footer-right">
-      <a href="#contact" class="footer-contact-pill">
-        Contact
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <ul class="footer-links">
-        <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
-      </ul>
-    </div>
-  </footer>
-
   <script>
-    // ── Nav scroll state ──
-    const nav = document.getElementById('nav');
-    const pageHero = document.getElementById('page-hero');
+    // Nav swap on scroll
+    const heroNav = document.getElementById('heroNav');
+    const pillNav = document.getElementById('pillNav');
 
-    function updateNav() {
-      const heroBottom = pageHero.getBoundingClientRect().bottom;
-      if (heroBottom > 80) {
-        nav.classList.add('at-top');
-        nav.classList.remove('scrolled');
-      } else {
-        nav.classList.remove('at-top');
-        nav.classList.add('scrolled');
-      }
+    function onScroll() {
+      const pastHero = window.scrollY >= window.innerHeight * 0.4;
+      heroNav.classList.toggle('hidden', pastHero);
+      pillNav.classList.toggle('visible', pastHero);
     }
 
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      });
+    });
 
-    // ── Contact modal ──
+    // Contact modal
     const backdrop = document.getElementById('modalBackdrop');
-
-    function openModal() {
+    document.getElementById('openContact').addEventListener('click', () => {
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
-    }
+    });
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     function closeModal() {
       backdrop.classList.remove('open');
       document.body.style.overflow = '';
     }
-
-    document.getElementById('openContactBtn').addEventListener('click', openModal);
-    document.getElementById('openContact').addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal();
-    });
-    document.getElementById('closeModal').addEventListener('click', closeModal);
-    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -1094,19 +781,7 @@
       btn.disabled = true;
       setTimeout(closeModal, 1400);
     }
-
-    // ── Scroll reveal ──
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    reveals.forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
