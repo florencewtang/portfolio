@@ -1220,9 +1220,17 @@
           body: new FormData(e.target),
           headers: { 'Accept': 'application/json' }
         });
-        btn.textContent = 'Sent ✓';
-        setTimeout(closeModal, 1400);
+        if (res.ok) {
+          btn.textContent = 'Sent ✓';
+          setTimeout(closeModal, 1400);
+        } else {
+          const data = await res.json();
+          console.error('Formspree error:', data);
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+        }
       } catch (err) {
+        console.error('Submit error:', err);
         btn.textContent = 'Try again';
         btn.disabled = false;
       }
