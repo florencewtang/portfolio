@@ -127,6 +127,13 @@
       .modal-body { grid-template-columns: 1fr; gap: 2rem 0; }
       .modal-left { display: none; }
     }
+  
+    @media (max-width: 600px) {
+      .contact-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .contact-social { order: 1; }
+      .contact-bottom-left { order: 2; }
+      .contact-bottom-right { order: 3; text-align: left; }
+    }
   </style>
 </head>
 <body>
@@ -242,6 +249,7 @@
     </div>
     <div class="contact-bottom">
       <div class="contact-bottom-left">
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.35);">Built with Claude Code</span>
       </div>
       <div class="contact-social">
         <a href="https://www.linkedin.com/in/florencewtang" target="_blank" rel="noopener">LinkedIn</a>
