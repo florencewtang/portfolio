@@ -716,15 +716,15 @@
         <form class="modal-form" id="contactForm" onsubmit="handleSubmit(event)">
           <div class="form-field">
             <label for="cf-name">Full Name</label>
-            <input id="cf-name" type="text" placeholder="Florence Tang" required />
+            <input id="cf-name" name="name" type="text" placeholder="Florence Tang" required />
           </div>
           <div class="form-field">
             <label for="cf-email">Email</label>
-            <input id="cf-email" type="email" placeholder="hello@example.com" required />
+            <input id="cf-email" name="email" type="email" placeholder="hello@example.com" required />
           </div>
           <div class="form-field">
             <label for="cf-service">Service</label>
-            <select id="cf-service" required>
+            <select id="cf-service" name="service" required>
               <option value="" disabled selected></option>
               <option>Design</option>
               <option>Web Production</option>
@@ -736,7 +736,7 @@
           </div>
           <div class="form-field">
             <label for="cf-message">Message</label>
-            <textarea id="cf-message" rows="4" placeholder="Tell me about your project…" required></textarea>
+            <textarea id="cf-message" name="message" rows="4" placeholder="Tell me about your project…" required></textarea>
           </div>
           <div class="modal-actions">
             <button type="submit" class="modal-submit-btn">
@@ -782,12 +782,31 @@
       document.body.style.overflow = '';
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('[type="submit"]');
-      btn.textContent = 'Sent ✓';
+      btn.textContent = 'Sending…';
       btn.disabled = true;
-      setTimeout(closeModal, 1400);
+      try {
+        const res = await fetch('https://formspree.io/f/xwvabnkr', {
+          method: 'POST',
+          body: new FormData(e.target),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          btn.textContent = 'Sent ✓';
+          setTimeout(closeModal, 1400);
+        } else {
+          const data = await res.json();
+          console.error('Formspree error:', data);
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        console.error('Submit error:', err);
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
     }
   </script>
 
