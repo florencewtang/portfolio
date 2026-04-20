@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AVZ — Capabilities</title>
+  <style>
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Extraleicht.otf') format('opentype');
+      font-weight: 200; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Leicht.otf') format('opentype');
+      font-weight: 300; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Buch.otf') format('opentype');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Kräftig.otf') format('opentype');
+      font-weight: 500; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('TestSöhne-Halbfett.otf') format('opentype');
+      font-weight: 600; font-style: normal;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --beige: #cbb8ae;
+      --salmon: #d97b60;
+      --crimson: #b8193f;
+      --red-accent: #c0392b;
+      --white: #ffffff;
+      --black: #1a1a1a;
+      --sans: 'Söhne', system-ui, sans-serif;
+      --margin: 100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      background: var(--beige);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem var(--margin);
+      transition: opacity 0.3s;
+    }
+
+    .nav-logo svg { width: 48px; height: auto; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+    .nav-links a.active { color: var(--salmon); }
+
+    /* ── PILL NAV ── */
+    .pill-nav {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 300;
+      display: flex;
+      gap: 1.75rem;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      padding: 0.55rem 1.5rem;
+      list-style: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+      white-space: nowrap;
+    }
+
+    .pill-nav.visible { opacity: 1; pointer-events: all; }
+
+    .pill-nav a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .pill-nav a:hover { opacity: 0.5; }
+    .pill-nav a.active { color: var(--salmon); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding: calc(6rem + 60px) var(--margin) 6rem;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-inner { max-width: 640px; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: 0.01em;
+      margin-bottom: 1.5rem;
+      background: rgba(0,0,0,0.08);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--black);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-body {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #4a3c35;
+      max-width: 440px;
+    }
+
+    /* ── CAPABILITIES LIST ── */
+    #capabilities {
+      padding: 0 var(--margin);
+    }
+
+    .cap-item {
+      padding: 5rem 0;
+      border-top: 1.5px solid rgba(0,0,0,0.25);
+    }
+
+    .cap-item:last-child {
+      border-bottom: 1.5px solid rgba(0,0,0,0.25);
+    }
+
+    .cap-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--black);
+      background: rgba(0,0,0,0.08);
+      border-radius: 999px;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .cap-heading {
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.1rem;
+    }
+
+    .cap-body {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: #4a3c35;
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 3rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 50px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(0,0,0,0.2);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--black);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .service-item:hover { opacity: 0.55; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--beige);
+      padding: 4rem var(--margin) 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover { opacity: 0.5; }
+    .footer-links a.active { color: var(--red-accent); }
+
+    .footer-logo svg { width: 120px; height: auto; }
+  </style>
+</head>
+<body>
+
+  <!-- PILL NAV -->
+  <ul class="pill-nav" id="pill-nav">
+    <li><a href="atwill.html">About</a></li>
+    <li><a href="capabilities.html">Menu</a></li>
+    <li><a href="#">Works</a></li>
+    <li><a href="#" class="active">Contact</a></li>
+  </ul>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="atwill.html" class="nav-logo" aria-label="Home">
+      <svg width="1335" height="446" viewBox="0 0 1335 446" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M787.5 2L564.5 2.00003L672 220L787.5 2Z" fill="#B81504"/>
+        <path d="M564.475 2L672.433 220.3L554.526 446L334.949 2H564.475ZM784.052 446L672.433 220.3L786.475 2H1016L784.052 446Z" fill="#F29781"/>
+        <path d="M232.192 0L452 444L0 444L232.192 0Z" fill="#B81504"/>
+        <path d="M227.041 227L335 445H113L227.041 227Z" fill="#F29781"/>
+        <path d="M1115.19 0L1335 444L883 444L1115.19 0Z" fill="#B81504"/>
+        <path d="M1183.04 136L1291 354H1069L1183.04 136Z" fill="#F29781"/>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="atwill.html">About</a></li>
+      <li><a href="capabilities.html">Menu</a></li>
+      <li><a href="#">Works</a></li>
+      <li><a href="#" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="section-tag">What we do</span>
+      <h1 class="hero-heading">Every great brand<br>starts here.</h1>
+      <p class="hero-body">
+        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+      </p>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities">
+
+    <div class="cap-item">
+      <div class="cap-number">01</div>
+      <h2 class="cap-heading">Branding and Positioning</h2>
+      <p class="cap-body">
+        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
+      </p>
+      <div class="services-grid">
+        <div class="service-item">Brand Strategy</div>
+        <div class="service-item">Visual Identity</div>
+        <div class="service-item">Brand Guidelines</div>
+        <div class="service-item">Naming and Messaging</div>
+        <div class="service-item">Market Positioning</div>
+        <div class="service-item">Competitive Research</div>
+      </div>
+    </div>
+
+    <div class="cap-item">
+      <div class="cap-number">02</div>
+      <h2 class="cap-heading">Web Strategy</h2>
+      <p class="cap-body">
+        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
+      </p>
+      <div class="services-grid">
+        <div class="service-item">UX and Information Architecture</div>
+        <div class="service-item">Web Design</div>
+        <div class="service-item">CMS Development</div>
+        <div class="service-item">Conversion Optimization</div>
+        <div class="service-item">SEO Foundations</div>
+        <div class="service-item">Performance Audits</div>
+      </div>
+    </div>
+
+    <div class="cap-item">
+      <div class="cap-number">03</div>
+      <h2 class="cap-heading">Digital Presence</h2>
+      <p class="cap-body">
+        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
+      </p>
+      <div class="services-grid">
+        <div class="service-item">Social Strategy</div>
+        <div class="service-item">Content Creation</div>
+        <div class="service-item">Email Marketing</div>
+        <div class="service-item">Paid Media</div>
+        <div class="service-item">Analytics and Reporting</div>
+        <div class="service-item">Community Management</div>
+      </div>
+    </div>
+
+    <div class="cap-item">
+      <div class="cap-number">04</div>
+      <h2 class="cap-heading">Campaigns and Activation</h2>
+      <p class="cap-body">
+        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
+      </p>
+      <div class="services-grid">
+        <div class="service-item">Campaign Concepting</div>
+        <div class="service-item">Event Production</div>
+        <div class="service-item">Experiential Design</div>
+        <div class="service-item">Partnerships</div>
+        <div class="service-item">Launch Strategy</div>
+        <div class="service-item">PR and Outreach</div>
+      </div>
+    </div>
+
+    <div class="cap-item">
+      <div class="cap-number">05</div>
+      <h2 class="cap-heading">Creative Production</h2>
+      <p class="cap-body">
+        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
+      </p>
+      <div class="services-grid">
+        <div class="service-item">Art Direction</div>
+        <div class="service-item">Photography</div>
+        <div class="service-item">Video and Motion</div>
+        <div class="service-item">Copywriting</div>
+        <div class="service-item">Illustration</div>
+        <div class="service-item">Print and Packaging</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <ul class="footer-links">
+      <li><a href="atwill.html">About</a></li>
+      <li><a href="capabilities.html">Menu</a></li>
+      <li><a href="#">Works</a></li>
+      <li><a href="#" class="active">Contact</a></li>
+    </ul>
+    <div class="footer-logo" aria-label="AVZ">
+      <svg width="1335" height="446" viewBox="0 0 1335 446" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M787.5 2L564.5 2.00003L672 220L787.5 2Z" fill="#B81504"/>
+        <path d="M564.475 2L672.433 220.3L554.526 446L334.949 2H564.475ZM784.052 446L672.433 220.3L786.475 2H1016L784.052 446Z" fill="#F29781"/>
+        <path d="M232.192 0L452 444L0 444L232.192 0Z" fill="#B81504"/>
+        <path d="M227.041 227L335 445H113L227.041 227Z" fill="#F29781"/>
+        <path d="M1115.19 0L1335 444L883 444L1115.19 0Z" fill="#B81504"/>
+        <path d="M1183.04 136L1291 354H1069L1183.04 136Z" fill="#F29781"/>
+      </svg>
+    </div>
+  </footer>
+
+  <script>
+    const pillNav = document.getElementById('pill-nav');
+    const mainNav = document.getElementById('main-nav');
+    const heroEl  = document.getElementById('hero');
+
+    function updateNav() {
+      const past = window.scrollY > 60;
+      pillNav.classList.toggle('visible', past);
+      mainNav.style.opacity = past ? '0' : '1';
+      mainNav.style.pointerEvents = past ? 'none' : 'all';
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+  </script>
+
+</body>
+</html>
