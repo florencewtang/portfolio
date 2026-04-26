@@ -70,7 +70,6 @@
       padding: 1.25rem var(--margin);
     }
 
-    .nav-logo { transition: opacity 0.4s; }
     .nav-logo svg { width: 60px; height: auto; }
 
     .nav-links {
@@ -83,7 +82,7 @@
     /* ── HERO WORDMARK ── */
     .hero-wordmark {
       position: absolute;
-      bottom: 0;
+      bottom: 50px;
       left: var(--margin);
       font-size: clamp(72px, 9.5vw, 136px);
       font-weight: 600;
@@ -666,9 +665,15 @@
     window.addEventListener('scroll', updateNav,    { passive: true });
     window.addEventListener('scroll', updateColors, { passive: true });
     window.addEventListener('resize', () => { buildLines(); updateColors(); });
+
+    // Defer buildLines until fonts are loaded so offsetTop values are accurate
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { buildLines(); updateColors(); });
+    } else {
+      window.addEventListener('load', () => { buildLines(); updateColors(); });
+    }
+
     updateNav();
-    buildLines();
-    updateColors();
   </script>
 </body>
 </html>
