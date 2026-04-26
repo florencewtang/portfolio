@@ -63,7 +63,7 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
+      z-index: 260;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -674,8 +674,6 @@
     function updateNav() {
       const past = window.scrollY > 60;
       pillNav.classList.toggle('visible', past);
-      fixedNav.style.opacity = past ? '0' : '1';
-      fixedNav.style.pointerEvents = past ? 'none' : 'all';
     }
 
     // ── Morphing hero logo ──
