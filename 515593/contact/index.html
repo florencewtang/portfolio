@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AVZ — Capabilities</title>
+  <title>AVZ — Contact</title>
   <style>
     @font-face {
       font-family: 'Söhne';
@@ -52,7 +52,7 @@
       line-height: 1.6;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      background: var(--beige);
+      background: var(--white);
       color: var(--black);
       overflow-x: hidden;
     }
@@ -130,6 +130,7 @@
       padding: calc(6rem + 60px) var(--margin) 6rem;
       display: flex;
       align-items: flex-end;
+      background: var(--white);
     }
 
     .hero-inner { max-width: 640px; }
@@ -161,82 +162,125 @@
       font-weight: 400;
       line-height: 1.15;
       letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .hero-body {
       font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.7;
-      color: #4a3c35;
-      max-width: 440px;
+      color: #666;
+      line-height: 1.6;
     }
 
-    /* ── CAPABILITIES LIST ── */
-    #capabilities {
-      padding: 0 var(--margin);
+    /* ── CONTACT SECTION ── */
+    #contact-body {
+      padding: 0 var(--margin) 8rem;
+      background: var(--white);
     }
 
-    .cap-item {
-      padding: 5rem 0;
-      border-top: 1.5px solid rgba(0,0,0,0.25);
+    .contact-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.15);
+      margin-bottom: 5rem;
     }
 
-    .cap-item:last-child {
-      border-bottom: 1.5px solid rgba(0,0,0,0.25);
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: flex-start;
     }
 
-    .cap-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
+    /* Left col */
+    .contact-info-label {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #999;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-info-value {
+      font-size: 1rem;
       font-weight: 400;
       color: var(--black);
-      background: rgba(0,0,0,0.08);
-      border-radius: 999px;
-      padding: 0.25rem 0.65rem;
-      margin-bottom: 1.25rem;
-      letter-spacing: 0.02em;
     }
 
-    .cap-heading {
+    /* Right col */
+    .form-heading {
       font-size: 1.5rem;
       font-weight: 400;
-      line-height: 1.2;
       letter-spacing: -0.01em;
-      margin-bottom: 1.1rem;
+      margin-bottom: 2rem;
     }
 
-    .cap-body {
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: #4a3c35;
-      line-height: 1.7;
-      max-width: 420px;
-      margin-bottom: 3rem;
-    }
-
-    .services-grid {
+    .form-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 50px;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .service-item {
+    .form-field {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-      border-top: 1px solid rgba(0,0,0,0.2);
-      font-size: 0.8rem;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-field label {
+      font-size: 0.78rem;
       font-weight: 400;
       color: var(--black);
-      cursor: pointer;
-      transition: opacity 0.2s;
     }
 
-    .service-item { cursor: default; }
+    .form-field input,
+    .form-field textarea {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--black);
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+      width: 100%;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--black);
+    }
+
+    .form-field textarea {
+      height: 200px;
+    }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--black);
+      border-radius: 999px;
+      padding: 0.65rem 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--black);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover {
+      background: var(--black);
+      color: var(--white);
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -273,9 +317,9 @@
   <!-- PILL NAV -->
   <ul class="pill-nav" id="pill-nav">
     <li><a href="../atwill/index.html">About</a></li>
-    <li><a href="index.html">Menu</a></li>
+    <li><a href="../capabilities/index.html">Menu</a></li>
     <li><a href="#">Works</a></li>
-    <li><a href="../contact/index.html" class="active">Contact</a></li>
+    <li><a href="index.html" class="active">Contact</a></li>
   </ul>
 
   <!-- NAV -->
@@ -292,132 +336,64 @@
     </a>
     <ul class="nav-links">
       <li><a href="../atwill/index.html">About</a></li>
-      <li><a href="index.html">Menu</a></li>
+      <li><a href="../capabilities/index.html">Menu</a></li>
       <li><a href="#">Works</a></li>
-      <li><a href="../contact/index.html" class="active">Contact</a></li>
+      <li><a href="index.html" class="active">Contact</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
-      <span class="section-tag">What we do</span>
-      <h1 class="hero-heading">Every great brand<br>starts here.</h1>
-      <p class="hero-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-      </p>
+      <span class="section-tag">Contact Us</span>
+      <h1 class="hero-heading">Let's get in touch</h1>
+      <p class="hero-body">Tell us what's on your mind.</p>
     </div>
   </section>
 
-  <!-- CAPABILITIES -->
-  <section id="capabilities">
+  <!-- CONTACT BODY -->
+  <div id="contact-body">
+    <hr class="contact-divider" />
+    <div class="contact-grid">
 
-    <div class="cap-item" id="branding">
-      <div class="cap-number">01</div>
-      <h2 class="cap-heading">Branding and Positioning</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Brand Strategy</div>
-        <div class="service-item">Visual Identity</div>
-        <div class="service-item">Brand Guidelines</div>
-        <div class="service-item">Naming and Messaging</div>
-        <div class="service-item">Market Positioning</div>
-        <div class="service-item">Competitive Research</div>
+      <!-- Left: info -->
+      <div class="contact-info">
+        <p class="contact-info-label">Email</p>
+        <p class="contact-info-value">info@atwillcreative.com</p>
       </div>
-    </div>
 
-    <div class="cap-item" id="web-strategy">
-      <div class="cap-number">02</div>
-      <h2 class="cap-heading">Web Strategy</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">UX and Information Architecture</div>
-        <div class="service-item">Web Design</div>
-        <div class="service-item">CMS Development</div>
-        <div class="service-item">Conversion Optimization</div>
-        <div class="service-item">SEO Foundations</div>
-        <div class="service-item">Performance Audits</div>
+      <!-- Right: form -->
+      <div class="contact-form">
+        <h2 class="form-heading">Send us a message</h2>
+        <form action="#" method="POST">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" name="first_name" placeholder="" />
+            </div>
+            <div class="form-field">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last_name" placeholder="" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send message &nbsp;→</button>
+        </form>
       </div>
-    </div>
 
-    <div class="cap-item" id="digital-presence">
-      <div class="cap-number">03</div>
-      <h2 class="cap-heading">Digital Presence</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Social Strategy</div>
-        <div class="service-item">Content Creation</div>
-        <div class="service-item">Email Marketing</div>
-        <div class="service-item">Paid Media</div>
-        <div class="service-item">Analytics and Reporting</div>
-        <div class="service-item">Community Management</div>
-      </div>
     </div>
-
-    <div class="cap-item" id="campaigns">
-      <div class="cap-number">04</div>
-      <h2 class="cap-heading">Campaigns and Activation</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Campaign Concepting</div>
-        <div class="service-item">Event Production</div>
-        <div class="service-item">Experiential Design</div>
-        <div class="service-item">Partnerships</div>
-        <div class="service-item">Launch Strategy</div>
-        <div class="service-item">PR and Outreach</div>
-      </div>
-    </div>
-
-    <div class="cap-item" id="creative-production">
-      <div class="cap-number">05</div>
-      <h2 class="cap-heading">Creative Production</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Art Direction</div>
-        <div class="service-item">Photography</div>
-        <div class="service-item">Video and Motion</div>
-        <div class="service-item">Copywriting</div>
-        <div class="service-item">Illustration</div>
-        <div class="service-item">Print and Packaging</div>
-      </div>
-    </div>
-
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
     <ul class="footer-links">
       <li><a href="../atwill/index.html">About</a></li>
-      <li><a href="index.html">Menu</a></li>
+      <li><a href="../capabilities/index.html">Menu</a></li>
       <li><a href="#">Works</a></li>
-      <li><a href="../contact/index.html" class="active">Contact</a></li>
+      <li><a href="index.html" class="active">Contact</a></li>
     </ul>
     <div class="footer-logo" aria-label="AVZ">
       <svg width="1335" height="446" viewBox="0 0 1335 446" fill="none" xmlns="http://www.w3.org/2000/svg">
