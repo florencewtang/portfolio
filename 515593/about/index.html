@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AVZ — Capabilities</title>
+  <title>AVZ — About</title>
   <style>
     @font-face {
       font-family: 'Söhne';
@@ -52,7 +52,7 @@
       line-height: 1.6;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
-      background: var(--beige);
+      background: var(--white);
       color: var(--black);
       overflow-x: hidden;
     }
@@ -130,9 +130,10 @@
       padding: calc(6rem + 60px) var(--margin) 6rem;
       display: flex;
       align-items: flex-end;
+      background: var(--white);
     }
 
-    .hero-inner { max-width: 640px; }
+    .hero-inner { max-width: 760px; }
 
     .section-tag {
       display: inline-flex;
@@ -161,82 +162,87 @@
       font-weight: 400;
       line-height: 1.15;
       letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .hero-body {
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 300;
-      line-height: 1.7;
-      color: #4a3c35;
-      max-width: 440px;
+      color: #555;
+      line-height: 1.75;
+      max-width: 560px;
     }
 
-    /* ── CAPABILITIES LIST ── */
-    #capabilities {
-      padding: 0 var(--margin);
+    /* ── STORY SECTION ── */
+    #story {
+      padding: 0 var(--margin) 8rem;
+      background: var(--white);
     }
 
-    .cap-item {
-      padding: 5rem 0;
-      border-top: 1.5px solid rgba(0,0,0,0.25);
+    .story-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.15);
+      margin-bottom: 5rem;
     }
 
-    .cap-item:last-child {
-      border-bottom: 1.5px solid rgba(0,0,0,0.25);
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: flex-start;
+      margin-bottom: 6rem;
     }
 
-    .cap-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
+    .story-label {
+      font-size: 0.75rem;
       font-weight: 400;
-      color: var(--black);
-      background: rgba(0,0,0,0.08);
-      border-radius: 999px;
-      padding: 0.25rem 0.65rem;
-      margin-bottom: 1.25rem;
-      letter-spacing: 0.02em;
+      color: #999;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-top: 0.2rem;
     }
 
-    .cap-heading {
+    .story-text p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .story-text p:last-child { margin-bottom: 0; }
+
+    /* ── VALUES ── */
+    .values-heading {
       font-size: 1.5rem;
       font-weight: 400;
-      line-height: 1.2;
       letter-spacing: -0.01em;
-      margin-bottom: 1.1rem;
-    }
-
-    .cap-body {
-      font-size: 0.85rem;
-      font-weight: 300;
-      color: #4a3c35;
-      line-height: 1.7;
-      max-width: 420px;
       margin-bottom: 3rem;
     }
 
-    .services-grid {
+    .values-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       column-gap: 50px;
     }
 
-    .service-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-      border-top: 1px solid rgba(0,0,0,0.2);
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: var(--black);
-      cursor: pointer;
-      transition: opacity 0.2s;
+    .value-item {
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(0,0,0,0.15);
     }
 
-    .service-item { cursor: default; }
+    .value-title {
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .value-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.7;
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -272,10 +278,10 @@
 
   <!-- PILL NAV -->
   <ul class="pill-nav" id="pill-nav">
-    <li><a href="../about/index.html">About</a></li>
-    <li><a href="index.html">Menu</a></li>
+    <li><a href="index.html" class="active">About</a></li>
+    <li><a href="../capabilities/index.html">Menu</a></li>
     <li><a href="#">Works</a></li>
-    <li><a href="../contact/index.html" class="active">Contact</a></li>
+    <li><a href="../contact/index.html">Contact</a></li>
   </ul>
 
   <!-- NAV -->
@@ -291,121 +297,72 @@
       </svg>
     </a>
     <ul class="nav-links">
-      <li><a href="../about/index.html">About</a></li>
-      <li><a href="index.html">Menu</a></li>
+      <li><a href="index.html" class="active">About</a></li>
+      <li><a href="../capabilities/index.html">Menu</a></li>
       <li><a href="#">Works</a></li>
-      <li><a href="../contact/index.html" class="active">Contact</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
-      <span class="section-tag">What we do</span>
-      <h1 class="hero-heading">Every great brand<br>starts here.</h1>
+      <span class="section-tag">Who we are</span>
+      <h1 class="hero-heading">An agency built<br>on conviction.</h1>
       <p class="hero-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+        At Will Creative is a full-service brand and creative studio helping businesses find their voice, shape their identity, and show up with purpose across every touchpoint.
       </p>
     </div>
   </section>
 
-  <!-- CAPABILITIES -->
-  <section id="capabilities">
+  <!-- STORY -->
+  <section id="story">
+    <hr class="story-divider" />
 
-    <div class="cap-item" id="branding">
-      <div class="cap-number">01</div>
-      <h2 class="cap-heading">Branding and Positioning</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Brand Strategy</div>
-        <div class="service-item">Visual Identity</div>
-        <div class="service-item">Brand Guidelines</div>
-        <div class="service-item">Naming and Messaging</div>
-        <div class="service-item">Market Positioning</div>
-        <div class="service-item">Competitive Research</div>
+    <div class="story-grid">
+      <div>
+        <p class="story-label">Our Story</p>
+      </div>
+      <div class="story-text">
+        <p>
+          We started At Will Creative because we believed great branding shouldn't be reserved for brands with the biggest budgets. The best ideas come from clarity — knowing exactly who you are, what you stand for, and who you're trying to reach.
+        </p>
+        <p>
+          Our team brings together strategy, design, and production under one roof, so the work stays coherent from the first conversation to the final deliverable. We partner closely with founders, marketing leads, and creative directors who want an agency that moves fast without cutting corners.
+        </p>
+        <p>
+          Whether we're naming a new company, rebuilding a website, or producing a campaign from scratch — we approach every project the same way: with a clear point of view and a bias toward work that actually connects.
+        </p>
       </div>
     </div>
 
-    <div class="cap-item" id="web-strategy">
-      <div class="cap-number">02</div>
-      <h2 class="cap-heading">Web Strategy</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">UX and Information Architecture</div>
-        <div class="service-item">Web Design</div>
-        <div class="service-item">CMS Development</div>
-        <div class="service-item">Conversion Optimization</div>
-        <div class="service-item">SEO Foundations</div>
-        <div class="service-item">Performance Audits</div>
+    <div class="story-grid">
+      <div>
+        <p class="story-label">What drives us</p>
+      </div>
+      <div class="story-text">
+        <p>
+          We believe the best creative work comes from genuine partnership. We don't hand off briefs and disappear — we stay in the room, ask hard questions, and push until the work feels true to who you are.
+        </p>
+        <p>
+          Our clients range from early-stage startups finding their footing to established brands ready for a new chapter. What they share is an appetite for work that doesn't blend in.
+        </p>
       </div>
     </div>
 
-    <div class="cap-item" id="digital-presence">
-      <div class="cap-number">03</div>
-      <h2 class="cap-heading">Digital Presence</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Social Strategy</div>
-        <div class="service-item">Content Creation</div>
-        <div class="service-item">Email Marketing</div>
-        <div class="service-item">Paid Media</div>
-        <div class="service-item">Analytics and Reporting</div>
-        <div class="service-item">Community Management</div>
+    <h2 class="values-heading">How we work</h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <p class="value-title">Point of view first</p>
+        <p class="value-body">Every project starts with a clear strategic foundation. We don't open Figma until we know exactly what we're saying and why.</p>
       </div>
-    </div>
-
-    <div class="cap-item" id="campaigns">
-      <div class="cap-number">04</div>
-      <h2 class="cap-heading">Campaigns and Activation</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Campaign Concepting</div>
-        <div class="service-item">Event Production</div>
-        <div class="service-item">Experiential Design</div>
-        <div class="service-item">Partnerships</div>
-        <div class="service-item">Launch Strategy</div>
-        <div class="service-item">PR and Outreach</div>
+      <div class="value-item">
+        <p class="value-title">Integrated by design</p>
+        <p class="value-body">Strategy, design, and production work together from day one — so nothing gets lost in translation between teams or deliverables.</p>
       </div>
-    </div>
-
-    <div class="cap-item" id="creative-production">
-      <div class="cap-number">05</div>
-      <h2 class="cap-heading">Creative Production</h2>
-      <p class="cap-body">
-        Every great brand starts with a clear point of view. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut ea commodo consequat. Duis aute irure dolor in reprehenderit in.
-      </p>
-      <div class="services-grid">
-        <div class="service-item">Art Direction</div>
-        <div class="service-item">Photography</div>
-        <div class="service-item">Video and Motion</div>
-        <div class="service-item">Copywriting</div>
-        <div class="service-item">Illustration</div>
-        <div class="service-item">Print and Packaging</div>
+      <div class="value-item">
+        <p class="value-title">Built to last</p>
+        <p class="value-body">We build brand systems and creative frameworks that scale. Not just a pretty deck, but a foundation your team can actually run with.</p>
       </div>
     </div>
 
@@ -414,10 +371,10 @@
   <!-- FOOTER -->
   <footer>
     <ul class="footer-links">
-      <li><a href="../about/index.html">About</a></li>
-      <li><a href="index.html">Menu</a></li>
+      <li><a href="index.html" class="active">About</a></li>
+      <li><a href="../capabilities/index.html">Menu</a></li>
       <li><a href="#">Works</a></li>
-      <li><a href="../contact/index.html" class="active">Contact</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
     </ul>
     <div class="footer-logo" aria-label="AVZ">
       <svg width="1335" height="446" viewBox="0 0 1335 446" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -434,7 +391,6 @@
   <script>
     const pillNav = document.getElementById('pill-nav');
     const mainNav = document.getElementById('main-nav');
-    const heroEl  = document.getElementById('hero');
 
     function updateNav() {
       const past = window.scrollY > 60;
