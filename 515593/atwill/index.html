@@ -310,6 +310,13 @@
       column-gap: 50px;
     }
 
+    @keyframes arrow-pulse {
+      0%   { transform: translate(0, 0) scale(1); }
+      40%  { transform: translate(2px, -2px) scale(1.15); }
+      70%  { transform: translate(1px, -1px) scale(1.08); }
+      100% { transform: translate(2px, -2px) scale(1.15); }
+    }
+
     .service-item {
       display: flex;
       align-items: center;
@@ -321,10 +328,14 @@
       color: var(--black);
       text-decoration: none;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: color 0.25s;
     }
 
-    .service-item:hover { opacity: 0.6; }
+    .service-item:hover { color: var(--white); }
+
+    .service-item:hover .service-arrow {
+      animation: arrow-pulse 0.7s ease-in-out infinite alternate;
+    }
 
     .service-item.muted {
       color: rgba(0,0,0,0.35);
