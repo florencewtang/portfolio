@@ -68,16 +68,33 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem var(--margin);
-      transition: opacity 0.3s;
     }
 
+    .nav-logo { transition: opacity 0.4s; }
     .nav-logo svg { width: 60px; height: auto; }
 
     .nav-links {
       display: flex;
       gap: 2rem;
       list-style: none;
+      transition: opacity 0.3s;
     }
+
+    /* ── HERO WORDMARK ── */
+    .hero-wordmark {
+      position: absolute;
+      bottom: 0;
+      left: var(--margin);
+      font-size: clamp(72px, 9.5vw, 136px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .wm-dark { color: var(--black); }
+    .wm-red  { color: #B81504; }
 
     .nav-links a {
       font-size: 0.8rem;
@@ -452,7 +469,11 @@
   </nav>
 
   <!-- HERO -->
-  <section id="hero"></section>
+  <section id="hero">
+    <div class="hero-wordmark">
+      <span class="wm-dark">at</span><span class="wm-red">will</span><span class="wm-dark">creative</span>
+    </div>
+  </section>
 
   <!-- INTRO -->
   <div id="intro-scroll">
@@ -600,15 +621,46 @@
       });
     }
 
-    // ── Pill nav toggle ──
-    const pillNav  = document.getElementById('pill-nav');
-    const fixedNav = document.querySelector('nav');
+    // ── Pill nav + logo scroll ──
+    const pillNav    = document.getElementById('pill-nav');
+    const navLinksEl = document.querySelector('.nav-links');
+    const navLogoEl  = document.querySelector('.nav-logo');
+    const heroEl     = document.getElementById('hero');
+
+    // SVG paths and their original rgb fills
+    const logoPaths = navLogoEl.querySelectorAll('path');
+    const origFills = [
+      {r:184,g:21,b:4},    // #B81504
+      {r:242,g:151,b:129}, // #F29781
+      {r:184,g:21,b:4},    // #B81504
+      {r:242,g:151,b:129}, // #F29781
+      {r:184,g:21,b:4},    // #B81504
+      {r:242,g:151,b:129}, // #F29781
+    ];
 
     function updateNav() {
-      const past = window.scrollY > 60;
+      const sy   = window.scrollY;
+      const past = sy > 60;
+
+      // Pill nav / link visibility
       pillNav.classList.toggle('visible', past);
-      fixedNav.style.opacity = past ? '0' : '1';
-      fixedNav.style.pointerEvents = past ? 'none' : 'all';
+      navLinksEl.style.opacity       = past ? '0' : '1';
+      navLinksEl.style.pointerEvents = past ? 'none' : 'all';
+
+      // Logo: transition fills → white, then fade, as orange section rises
+      const heroH    = heroEl.offsetHeight;
+      const fadeStart = heroH * 0.55;
+      const fadeEnd   = heroH * 0.95;
+      const p = Math.min(1, Math.max(0, (sy - fadeStart) / (fadeEnd - fadeStart)));
+
+      logoPaths.forEach((path, i) => {
+        const c = origFills[i] || origFills[0];
+        const r = Math.round(c.r + (255 - c.r) * p);
+        const g = Math.round(c.g + (255 - c.g) * p);
+        const b = Math.round(c.b + (255 - c.b) * p);
+        path.setAttribute('fill', `rgb(${r},${g},${b})`);
+      });
+      navLogoEl.style.opacity = String(Math.max(0, 1 - p * 1.4));
     }
 
     window.addEventListener('scroll', updateNav,    { passive: true });
