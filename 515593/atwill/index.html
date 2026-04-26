@@ -666,14 +666,12 @@
     window.addEventListener('scroll', updateColors, { passive: true });
     window.addEventListener('resize', () => { buildLines(); updateColors(); });
 
-    // Defer buildLines until fonts are loaded so offsetTop values are accurate
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => { buildLines(); updateColors(); });
-    } else {
-      window.addEventListener('load', () => { buildLines(); updateColors(); });
-    }
-
+    // Build lines immediately so scrolling works right away,
+    // then rebuild once on load to get accurate post-font offsetTops
+    buildLines();
+    updateColors();
     updateNav();
+    window.addEventListener('load', () => { buildLines(); updateColors(); });
   </script>
 </body>
 </html>
