@@ -435,6 +435,48 @@
       width: 120px;
       height: auto;
     }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      :root { --margin: 24px; }
+
+      /* Nav */
+      nav { padding: 1rem var(--margin); }
+      .nav-links { display: none; }
+      .nav-logo svg { width: 44px; }
+
+      /* Pill nav */
+      .pill-nav { gap: 1.1rem; padding: 0.5rem 1.1rem; }
+      .pill-nav a { font-size: 0.7rem; }
+
+      /* Hero wordmark */
+      .hero-wordmark {
+        font-size: clamp(36px, 9.5vw, 72px);
+        bottom: 32px;
+      }
+
+      /* Intro text */
+      #intro { padding: 4rem var(--margin); }
+      .intro-subtitle,
+      .intro-body { font-size: clamp(22px, 6vw, 32px); }
+
+      /* Who we are */
+      #who { padding: 4rem var(--margin); }
+      .who-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .who-photos { grid-template-columns: 1fr 1fr; }
+
+      /* What we do */
+      #what { padding: 4rem var(--margin); }
+      .services-grid { grid-template-columns: 1fr; }
+
+      /* CTA */
+      #cta { padding: 5rem var(--margin); }
+      .cta-heading { font-size: clamp(22px, 6vw, 32px); }
+
+      /* Footer */
+      footer { padding: 3rem var(--margin) 2rem; }
+      .footer-links { gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
+    }
   </style>
 </head>
 <body>
