@@ -815,9 +815,22 @@
       user-select: none;
     }
 
+    .mobile-hero-info {
+      display: none;
+      flex-direction: column;
+      gap: 0.15rem;
+      margin-bottom: 1.25rem;
+    }
+    .mobile-hero-info span {
+      font-size: 0.75rem;
+      color: var(--muted-dark);
+      line-height: 1.5;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { display: none; }
+      .mobile-hero-info { display: flex; }
       .pill-nav { opacity: 1 !important; pointer-events: all !important; }
       nav {
         grid-template-columns: 1fr auto;
@@ -883,6 +896,11 @@
   <section id="hero">
     <div class="hero-avatar">
       <img src="Florence_portrait.PNG" alt="Florence Tang" />
+    </div>
+    <div class="mobile-hero-info">
+      <span>Design that ships.</span>
+      <span>Web production &amp; brand design.</span>
+      <span>Toronto, ON &nbsp;·&nbsp; <span id="mobileTime"></span></span>
     </div>
     <div class="hero-name">Florence<br>Tang</div>
   </section>
@@ -1246,10 +1264,13 @@
     }
 
     function updateClock() {
-      document.getElementById('navTime').textContent = new Date().toLocaleTimeString('en-US', {
+      const t = new Date().toLocaleTimeString('en-US', {
         timeZone: 'America/Toronto',
         hour: 'numeric', minute: '2-digit', hour12: true
       });
+      document.getElementById('navTime').textContent = t;
+      const m = document.getElementById('mobileTime');
+      if (m) m.textContent = t;
     }
     updateClock();
     setInterval(updateClock, 1000);
